@@ -11,7 +11,8 @@ tags: [beaglebone pulseaudio bluetooth ubuntu]
 
 This post is a summary of the steps that were necessary for me to set up an A2DP
 interface to a bluetooth speaker using pulseaudio. This setup was completed
-using the original BeagleBone with Linaro Ubuntu 14.04.
+using the original BeagleBone with Linaro Ubuntu 14.04 but should apply for any
+debian based distribution.
 
 
 # Beaglebone USB issues
@@ -78,7 +79,11 @@ Now, we have to make a minor modification the pulseaudio daemon config file.
 
     $ sudo nano /etc/pulse/daemon.conf
 
-Look for this line and make sure it is commented out (i.e. make sure the line starts with the ; in front of it)
+Look for this line
+
+    resample-method = speex-float-3
+
+and replace it with
 
     ; resample-method = speex-float-3
 
@@ -95,8 +100,8 @@ mode first.
 
     $ bluez-simple-agent hci0 00:11:67:8C:17:80
 
-Finally, we'll connect to the bluetooth speaker (using the MAC address you
-obtained earlier)
+Finally, we'll connect to the bluetooth speaker using the MAC address you
+obtained earlier
 
     $ bluez-test-audio connect 00:11:67:8C:17:80
 
@@ -104,18 +109,18 @@ Verify you're connected with hcitool. You should get something like below
 
     $ hcitool con
     Connections:
-            < ACL C8:84:47:1D:98:EC handle 70 state 1 lm MASTER AUTH ENCRYPT
+            < ACL 00:11:67:8C:17:80 handle 70 state 1 lm MASTER AUTH ENCRYPT
 
 Great, now a bluetooth sink should be available for pulseaudio
 
     $ pactl list sinks short
-    1       bluez_sink.C8_84_47_1D_98_EC    module-bluetooth-device.c       s16le 2ch 44100Hz       RUNNING
+    1       bluez_sink.00:11:67:8C:17:80    module-bluetooth-device.c       s16le 2ch 44100Hz       RUNNING
 
-You can set this to the default source so that audio applications will
-automatically pick up on it (make sure to replace bluez_sink.C8_84_47_1D_98_EC
-with your own bluetooth sink id)
+If you have other audio devices you should set the default sink to our new
+bluetooth sink (make sure to replace bluez_sink.00:11:67:8C:17:80 with your own
+bluetooth sink id)
 
-    pacmd set-default-sink bluez_sink.C8_84_47_1D_98_EC
+    pacmd set-default-sink bluez_sink.00:11:67:8C:17:80
 
 
 # Sources
