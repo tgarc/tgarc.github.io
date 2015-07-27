@@ -4,7 +4,6 @@ title: "git cheat sheet"
 description: "A list of solutions to common git problems"
 tags: git
 ---
-{% include JB/setup %}
 
 ## Misc
 
