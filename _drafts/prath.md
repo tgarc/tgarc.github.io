@@ -6,13 +6,13 @@ tags:
     - notebook
 ---
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [1]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 %matplotlib inline
 import matplotlib.pyplot as plt
@@ -31,27 +31,30 @@ print "numpy:",np.version.short_version
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [1]: 
 </div> 
 
-<div class="output_area">
-    pandas: 0.16.2
-    numpy: 1.8.2
-</div>
+<div class="ipy output_area">
+
+<pre>pandas: 0.16.2
+numpy: 1.8.2
+</pre>
 
 </div>
 
+</div>
 
-<div class="input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy input">
+
+<div class="ipy prompt input_prompt"> 
 In [2]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 conn = sqlite3.connect('prath.sqlite')
 prath = pd.read_sql_query("select image_id,pixel_index,skin,r,g,b from pixels",conn)
@@ -65,13 +68,13 @@ prath.head()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [2]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
 
 
@@ -144,13 +147,13 @@ Out [2]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [3]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 images = pd.read_sql("select * from images",conn,index_col='file_name')
 images.head()
@@ -159,13 +162,13 @@ images.head()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [3]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
 
 
@@ -228,13 +231,13 @@ Out [3]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [4]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 conn.close() # we're done loading data
 {% endhighlight %}
@@ -243,13 +246,13 @@ conn.close() # we're done loading data
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [5]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 fig, axes = plt.subplots(4,4,subplot_kw=dict(xticks=[],yticks=[]))
 sample_images = np.random.choice(images.index.values,16,replace=False)
@@ -268,13 +271,13 @@ fig.subplots_adjust(wspace=0,hspace=0)
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [5]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_4_0.png"/>
@@ -287,13 +290,13 @@ Out [5]:
 # Let's do a logit fit on the RGB prath dataset 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [6]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 from StringIO import StringIO
 def report(y,predy):
@@ -313,13 +316,13 @@ def report(y,predy):
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [7]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 from sklearn.linear_model import LogisticRegression
 from sklearn.cross_validation import train_test_split
@@ -339,23 +342,23 @@ print report(test.skin, clf_rgb.predict(get_rgb_features(test)))
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [7]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
-    LogisticRegression(C=0.001, class_weight=None, dual=False, fit_intercept=True,
-              intercept_scaling=1, max_iter=100, multi_class='ovr',
-              penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
-              verbose=0)
-    Accuracy: 2187240/2956654 (73.977%)
-    FN: 530492/2956654 (17.942%)
-    FP: 238922/2956654 (8.081%)
-    
+<pre>LogisticRegression(C=0.001, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr',
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0)
+Accuracy: 2187240/2956654 (73.977%)
+FN: 530492/2956654 (17.942%)
+FP: 238922/2956654 (8.081%)
 
+</pre>
 
 </div>
 
@@ -364,13 +367,13 @@ Out [7]:
 # Let's try to test the classifier on an example image... 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [8]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 def plot_thresh(img,predimg,mask):
     '''Display the results of applying a skin pixel classifier to an image'''
@@ -391,13 +394,13 @@ def plot_thresh(img,predimg,mask):
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [9]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 def get_image(fn):
     '''Helper function to get an rgb image from its name'''
@@ -418,13 +421,13 @@ def get_image(fn):
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [10]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 buffydf, buffy = get_image('06Apr03Face')
 buffydf['r2'] = buffydf['r']**2
@@ -443,13 +446,13 @@ plt.gcf().tight_layout()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [10]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_11_0.png"/>
@@ -462,13 +465,13 @@ Out [10]:
 # Let's explore skin pixels in the YCrCb colorspace 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [11]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 def add_crcb(df):
     # grabbed from http://www.equasys.de/colorconversion.html
@@ -482,13 +485,13 @@ add_crcb(prath)
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [12]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 def plot_density(df=None,colorbar=True,H=None,**kwargs):
     if H is None:
@@ -517,13 +520,13 @@ def plot_density(df=None,colorbar=True,H=None,**kwargs):
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [13]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 fig, (ax1,ax2) = plt.subplots(1,2)
 
@@ -558,22 +561,22 @@ print "\t"+"\n\t".join(report(merged.skin,merged.n >= 0).split("\n"))
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [13]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
-    Uniquely seperable skin/non-skin pixels: 
-    	10.61 %
-    Majority Thresholding classifier
-    	Accuracy: 4361413/5978842 (72.947%)
-    	FN: 1551894/5978842 (25.956%)
-    	FP: 0/5978842 (0.000%)
-    	
-
+<pre>Uniquely seperable skin/non-skin pixels: 
+	10.61 %
+Majority Thresholding classifier
+	Accuracy: 4361413/5978842 (72.947%)
+	FN: 1551894/5978842 (25.956%)
+	FP: 0/5978842 (0.000%)
+	
+</pre>
 
  
 <img src="{{ BASE_PATH }}/images/prath_15_1.png"/>
@@ -592,13 +595,13 @@ Out [13]:
 # Let's try fitting a logit model to the CrCb skin pixels 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [14]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 prath['Cr2'] = prath['Cr']**2
 prath['Cb2'] = prath['Cb']**2
@@ -616,23 +619,23 @@ print report(test.skin, clf_crcb.predict(get_ycc_features(test)))
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [14]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
-    LogisticRegression(C=1, class_weight=None, dual=False, fit_intercept=True,
-              intercept_scaling=1, max_iter=100, multi_class='ovr',
-              penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
-              verbose=0)
-    Accuracy: 2376592/2956654 (80.381%)
-    FN: 308338/2956654 (10.429%)
-    FP: 271724/2956654 (9.190%)
-    
+<pre>LogisticRegression(C=1, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr',
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0)
+Accuracy: 2376592/2956654 (80.381%)
+FN: 308338/2956654 (10.429%)
+FP: 271724/2956654 (9.190%)
 
+</pre>
 
 </div>
 
@@ -641,13 +644,13 @@ Out [14]:
 ### Let's see how it performs on our test image. 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [15]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 add_crcb(buffydf)
 buffydf['Cr2'] = buffydf['Cr']**2
@@ -659,13 +662,13 @@ buffydf['CrCb'] = buffydf['Cr']*buffydf['Cb']
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [16]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 pred = clf_crcb.predict_proba(get_ycc_features(buffydf))[:,1] # select only the skin=True probability
 predimg = pred.reshape(buffy.shape[:2])
@@ -677,13 +680,13 @@ plt.gcf().tight_layout()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [16]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_21_0.png"/>
@@ -694,13 +697,13 @@ Out [16]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [36]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 hard_thresh = [(150,180),(85,115)]
 def skinthresh(ds,thresh):
@@ -713,32 +716,32 @@ print report(test.skin, pred)
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [36]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
-    Accuracy: 2141119/2956654 (72.417%)
-    FN: 769001/2956654 (26.009%)
-    FP: 46534/2956654 (1.574%)
-    
+<pre>Accuracy: 2141119/2956654 (72.417%)
+FN: 769001/2956654 (26.009%)
+FP: 46534/2956654 (1.574%)
 
-
-</div>
+</pre>
 
 </div>
 
+</div>
 
-<div class="input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy input">
+
+<div class="ipy prompt input_prompt"> 
 In [33]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 predimg = skinthresh(buffydf,hard_thresh).reshape(buffy.shape[:2])
 plot_thresh(buffy,predimg,(buffydf['skin'] == 1).reshape(buffy.shape[:2]))
@@ -748,13 +751,13 @@ plt.gcf().tight_layout()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [33]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_23_0.png"/>
@@ -767,13 +770,13 @@ Out [33]:
 ### Let's look at the decision boundary 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [19]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 def decision_bound(clf,X,y,n=1000):
     theta = np.array(list(clf.intercept_) + list(clf.coef_.ravel()))
@@ -796,13 +799,13 @@ def decision_bound(clf,X,y,n=1000):
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [37]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 fig,(ax1,ax2) = plt.subplots(1,2)
 
@@ -841,13 +844,13 @@ fig.tight_layout()
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [37]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_26_0.png"/>
@@ -860,13 +863,13 @@ Out [37]:
 # Let's explore a few different skin profiles 
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [21]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 sample_images = ['Srilankan-Actress-Yamuna-Erandathi-001','06Apr03Face','pg42RF','dulani_anuradha4','Matthew_narrowweb__300x381,0']
 
@@ -899,13 +902,13 @@ skin['cluster'] = km.labels_
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [21]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_28_0.png"/>
@@ -916,13 +919,13 @@ Out [21]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [23]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 cr = np.linspace(np.min(prath['Cr']),np.max(prath['Cr']),N)
 cb = np.linspace(np.min(prath['Cb']),np.max(prath['Cb']),N)
@@ -945,21 +948,14 @@ for i,mean in enumerate(centroids): print "Cluster #{} = {}".format(i,mean)
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [23]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
-    Cluster #0 = [ 150.85660996  107.708975  ]
-    Cluster #1 = [ 139.21217822  117.20015359]
-    Cluster #2 = [ 171.8830747   91.7016004]
-    Cluster #3 = [ 160.39891208  100.70770297]
-
-
- 
 <img src="{{ BASE_PATH }}/images/prath_29_1.png"/>
 
 
@@ -968,13 +964,13 @@ Out [23]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [24]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 pshape=[180,240]
 
@@ -1002,13 +998,13 @@ fig.subplots_adjust(wspace=0)
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [24]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_30_0.png"/>
@@ -1019,13 +1015,13 @@ Out [24]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [25]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 sample_images = ['Srilankan-Actress-Yamuna-Erandathi-001','06Apr03Face','pg42RF','dulani_anuradha4','Matthew_narrowweb__300x381,0']
 
@@ -1059,13 +1055,13 @@ fig.subplots_adjust(wspace=0,hspace=0)
 
 </div>
 
-<div class="output">
+<div class="ipy output">
 
-<div class="prompt output_prompt"> 
+<div class="ipy prompt output_prompt"> 
 Out [25]: 
 </div> 
 
-<div class="output_area">
+<div class="ipy output_area">
 
  
 <img src="{{ BASE_PATH }}/images/prath_31_0.png"/>
@@ -1076,13 +1072,13 @@ Out [25]:
 </div>
 
 
-<div class="input">
+<div class="ipy input">
 
-<div class="prompt input_prompt"> 
+<div class="ipy prompt input_prompt"> 
 In [None]: 
 </div> 
 
-<div class="inner_cell">
+<div class="ipy inner_cell">
 {% highlight python %}
 
 {% endhighlight %}
