@@ -230,9 +230,7 @@ img {
 
   /* Custom formatting */
   max-width: 100%;
-  height: 100%;
-  width: auto\9; /* ie8 */
-
+  height: auto:
   margin-left: auto;
   margin-right: auto;
 }
@@ -674,6 +672,7 @@ pre {
 .ipy.inner_cell, .ipy.output_area { /* wrapper for area that contains code */
     box-sizing: border-box;
     width: 100%;
+    overflow: hidden;
 }
 
 .ipy.inner_cell .highlight pre, .ipy.output_area pre { /* code container */
