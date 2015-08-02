@@ -494,8 +494,9 @@ ul,
 ol,
 dl,
 img {
-  margin-top: 0;
+  /* margin-top: 0; */
   margin-bottom: 1.625em;
+  margin-top: 1.625em;
 }
 small,
 .small,
@@ -620,9 +621,9 @@ pre {
   font-family: monospace;
   font-size: 12pt;
 
-  margin-top: 5px;
-  margin-left: 0;
-  margin-right: 0;
+  /* margin-top: 5px; */
+  /* margin-left: 0; */
+  /* margin-right: 0; */
   padding: 1.625em;
   border-radius: 4px;
   padding: 0.5em;
@@ -636,17 +637,27 @@ pre {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.ipy.input, .ipy.output { /* box around box with code */
-    /* border: 1px solid #ccc; */
+.ipy.input, .ipy.output { /* box around ipython cells */
+    /* border: thin solid transparent; */
     /* border-radius: 10px; */
     padding-top: 0.5ex;
     padding-bottom: 0.5ex;
-    padding-left: 0.5em;
+    padding-right: 0.5ex;
+    /* padding-left: 0.5em; */
+    /* padding: 0; */
+    /* margin: 0; */
+
+    /* margin-bottom: 1.625em; */
+    /* margin-top: 1.625em; */
+
+
     clear: both;
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
 }
+
+/* .ipy.input { background-color: #f5f5f5; } */
 
 .ipy.prompt {
     min-width: 14ex;
@@ -655,35 +666,34 @@ pre {
     padding: 0.4em;
 
     text-align: right;
-
-    border-top: 1px solid transparent;
+    /* border-top: 1px solid transparent; */
 }
 
 .ipy.prompt.input_prompt { color: navy; }
 
 .ipy.prompt.output_prompt { color: darkred; }
 
-.ipy.prompt.input_prompt, .ipy.inner_cell { /* background: #f5f5f5; */ }
+/* .ipy.prompt.input_prompt, .ipy.inner_cell { background-color: inherit; } */
 
 .ipy.prompt, .ipy.inner_cell, .ipy.output_area {
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
+    /* padding: 0; */
 }
 
 .ipy.inner_cell, .ipy.output_area { /* wrapper for area that contains code */
     box-sizing: border-box;
     width: 100%;
     overflow: hidden;
+
+    /* padding-top: 0.1em; */
+    /* padding-bottom: 0.1em; */
 }
 
-.ipy.inner_cell .highlight pre, .ipy.output_area pre { /* code container */
+.ipy.inner_cell .highlight pre, .ipy.output_area pre { /* inner code and text ouput container */
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 2px;
     box-shadow: none;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+
+    margin: 0;
 }
 
 .ipy.output_area pre {

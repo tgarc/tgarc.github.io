@@ -1,12 +1,14 @@
 ---
 layout: page
-title: tom's developer blog
-tagline: a blog of how-tos covering linux, python, beaglebone and more
+title: Home of tgarc.github.io
+tagline: A blog of how-tos covering linux, python, beaglebone and more
 isHome: true
 ---
 {% include JB/setup %}
 
-## archive
+## {{ page.tagline }}
+
+## Recent Posts
 
 <ul class="posts">
 <table>

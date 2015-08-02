@@ -8,7 +8,7 @@ highlighter: pygments
 # so be sure to set them if your theme uses them.
 #
 title : tgarc.github.io
-tagline: Blog for documenting projects and how-tos
+tagline: A blog for Linux, Python, BeagleBone, & more
 author :
   name : Tomas Garcia
   email : toemossgarcia@gmail.com
